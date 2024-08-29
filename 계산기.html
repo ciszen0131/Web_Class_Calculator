@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <style>
+    .button {
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    }
+    </style>
+    
+    <script>
+    function add() {
+        document.getElementById("result").value = parseInt(document.getElementById("number1").value) + parseInt(document.getElementById("number2").value);
+    }
+    function sub() {
+        document.getElementById("result").value = parseInt(document.getElementById("number1").value) - parseInt(document.getElementById("number2").value);
+    }
+    function mul() {
+        document.getElementById("result").value = parseInt(document.getElementById("number1").value) * parseInt(document.getElementById("number2").value);
+        
+    }  
+    function div() {
+        document.getElementById("result").value = parseInt(document.getElementById("number1").value) / parseInt(document.getElementById("number2").value);
+        if(document.getElementById("number2").value == 0){
+            document.getElementById("result").value = Infinity;
+        }
+    }
+    function squ() {
+        let base = parseInt(document.getElementById("number1").value);
+        let exponent = document.getElementById("number2").value.trim();
+        if (exponent === "") {
+            document.getElementById("result").value = NaN;
+        } else {
+            let result = 1;
+            for (let i = 0; i < parseInt(exponent); i++) {
+                result *= base;
+            }
+            document.getElementById("result").value = result;
+        }
+    }
+    function toRadians(number1) {
+        return number1 * (Math.PI / 180);
+    }
+    function sin() {
+        let result = Math.sin(toRadians(parseInt(document.getElementById("number1").value)));
+        document.getElementById("result").value = parseFloat(result.toFixed(2));
+    }
+    
+    function cos() {
+        let result = Math.cos(toRadians(parseInt(document.getElementById("number1").value)));
+        document.getElementById("result").value = parseFloat(result.toFixed(2));
+    }
+    
+    function tan() {
+        let result = Math.tan(toRadians(parseInt(document.getElementById("number1").value)));
+        // Check if result is finite, as tan can return Infinity for certain angles
+        if (document.getElementById("number1").value % 180 !== 90) {
+            document.getElementById("result").value = parseFloat(result.toFixed(2));
+        } else {
+            document.getElementById("result").value = "Infinity";
+        }
+    }
+    function sqrt() {
+        document.getElementById("result").value = Math.sqrt(parseInt(document.getElementById("number1").value));
+    }   
+    </script>
+</head>
+<body>
+    숫자 1: <input type=text id="number1"><br>
+    숫자 2: <input type=text id="number2"><br>
+    <input type=button value="+" onClick="add()" class="button">
+    <input type=button value="-" onClick="sub()"class="button">
+    <input type=button value="*" onClick="mul()"class="button">
+    <input type=button value="/" onClick="div()"class="button">
+    <input type=button value="^" onClick="squ()"class="button">
+    <input type=button value="√" onClick="sqrt()" class="button">
+    <input type=button value="sin" onClick="sin()" class="button">
+    <input type=button value="cos" onClick="cos()" class="button">
+    <input type=button value="tan" onClick="tan()" class="button">  
+    <br>
+    연산결과: <input type=text id="result" value="">
+    <br>
+    주의: 루트와 삼각함수를 사용할 때 숫자 2는 계산에 무의미합니다.
+</body>
+</html>
+
